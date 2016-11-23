@@ -2,7 +2,9 @@
 from telegram import InlineQueryResultArticle, InlineQueryResultPhoto, InputTextMessageContent
 import uuid
 import hashlib
+import tempfile
 from imgflip import IFApi
+from PIL import Image, ImageDraw, ImageFont
 import settings
 
 
@@ -50,10 +52,10 @@ def inline(bot, update):
         results = []
         for meme in response['data']['memes']:
             results.append(
-                InlineQueryResultArticle(
+                InlineQueryResultPhoto(
                     id=uuid.uuid4(),
-                    title=str(meme['id']),
-                    input_message_content=InputTextMessageContent(meme['name'])
+                    photo_url='https://dummyimage.com/600x400/000000/ffffff&text=+++{}+++:'.format(meme['id']),
+                    thumb_url='https://dummyimage.com/600x400/000000/ffffff&text=+++{}+++:'.format(meme['id'])
                 )
             )
             results.append(
