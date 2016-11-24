@@ -3,7 +3,7 @@
 import settings
 import handlers
 import logging
-from telegram.ext import Updater, InlineQueryHandler, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -16,9 +16,6 @@ if __name__ == '__main__':
     updater = Updater(settings.TELEGRAM_TOKEN)
 
     updater.dispatcher.add_handler(CommandHandler('start', handlers.start))
-    # updater.dispatcher.add_handler(CommandHandler('help', handlers.help))
-    # updater.dispatcher.add_handler(InlineQueryHandler(handlers.inline))
-
     updater.dispatcher.add_handler(MessageHandler(Filters.text, handlers.message))
     updater.dispatcher.add_handler(CommandHandler('reset', handlers.reset))
     updater.dispatcher.add_handler(CommandHandler('cancel', handlers.reset))
