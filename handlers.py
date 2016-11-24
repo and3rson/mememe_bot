@@ -166,10 +166,10 @@ def message(bot, update):
         # TODO: Caption image
         bot.sendChatAction(update.message.chat_id, ChatAction.UPLOAD_PHOTO)
         response = api.caption_image(int(template_id), text1, text2)
-        if response['data']['success']:
+        if response['success']:
             update.message.reply_photo(photo=str(response['data']['url']))
         else:
-            update.message.reply_text(u'Помилка: верхній і нижній текст не можуть бути пусті обидвоє. Спробуй ще раз.')
+            update.message.reply_text(u'Сталася помилка: {}'.format(response['error_message']))
         update.message.reply_text(u'Якщо хочеш згенерувати нову картинку, просто введи новий запит пошуку картинки.')
         redis.delete(user_key)
 
